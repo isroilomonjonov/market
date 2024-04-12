@@ -27,21 +27,5 @@ export function ToggleLanguage({ locale, navAllText }: { locale: string, navAllT
                 </SelectGroup>
             </SelectContent>
         </Select>
-        // <Menubar className="border-none">
-        //     <MenubarMenu>
-        //         <MenubarTrigger>Language</MenubarTrigger>
-        //         <MenubarContent>
-        //             <MenubarItem onClick={() => { router.replace(pathname, { locale: 'en' }); }}>
-        //                 English
-        //             </MenubarItem>
-        //             <MenubarItem onClick={() => { router.replace(pathname, { locale: 'ru' }); }}>
-        //                 Russian
-        //             </MenubarItem>
-        //             <MenubarItem onClick={() => { router.replace(pathname, { locale: 'uz' }); }}>
-        //                 Uzbek
-        //             </MenubarItem>
-        //         </MenubarContent>
-        //     </MenubarMenu>
-        // </Menubar>
     )
 }

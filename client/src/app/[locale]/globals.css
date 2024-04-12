@@ -1,4 +1,60 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-  
+@tailwind components;
+@tailwind utilities;
+body {
+  box-sizing: inherit;
+}
+html {
+  scroll-behavior: smooth;
+}
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.text-animation {
+  position: relative;
+  animation: text-animation;
+  animation-duration: 1s;
+}
+::-webkit-scrollbar {
+  width: 0.3px;
+}
+@keyframes text-animation {
+  from {
+    left: -100%;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+.animation-from-bottom-to-top {
+  position: relative;
+  animation: animation-from-bottom-to-top;
+  animation-duration: 1s;
+}
+@keyframes animation-from-bottom-to-top {
+  from {
+    right: -100%;
+    opacity: 0;
+  }
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}
+.animation-diff {
+  position: relative;
+  animation: animation-diff;
+  animation-duration: 1.5s;
+}
+@keyframes animation-diff {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

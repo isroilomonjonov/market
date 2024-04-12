@@ -19,7 +19,7 @@ const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: Na
     }, [pathname])
     return (
         <div className='flex justify-center mb-[61px]'>
-            <div className='container fixed z-10 top-0 pt-2 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
+            <div className='container fixed z-10 top-0 pt-4 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
                 <button aria-label="barsicon" onClick={() => setOpen(!open)} className='md:hidden  p-1 md:p-2 scale-150 active:scale-100 transition-all duration-200'>{open ? <X className='text-eGlobalColorPrimary w-4 h-4 ' /> : <Menu className='text-eGlobalColorPrimary w-4 h-4 ' />}</button>
                 <div>
                     <Link href={"/"} className='flex gap-2'>
