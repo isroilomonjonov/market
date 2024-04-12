@@ -1,0 +1,20 @@
+{
+    "Index": {
+        "title": "Hello world UZ!",
+        "changeLanguageText": "Tilni o'zgartirish",
+        "websiteMode": {
+            "light": "Yorqin mavzu",
+            "dark": "Tungi mavzu",
+            "system": "Sistema mavzusi"
+        }
+    },
+    "Hero": {
+        "title": "onlayn do'koniga hush kelibsiz!",
+        "description": "Bu yerdan o'zingizga kerakli bo'lgan tovarlarni topishingiz va ularni onlayn sotib olishingiz mumkin!"
+    },
+    "Navbar": {
+        "Home": "Bosh sahifa",
+        "Products": "Mahsulotlar",
+        "Contacts": "Aloqa"
+    }
+}

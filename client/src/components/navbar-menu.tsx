@@ -1,71 +1,27 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
+import { Link } from '../navigation';
+import { usePathname } from "next/navigation";
+import { NavbarType } from "../../interfaces/navbar-interface";
 
-import { cn } from "@/lib/utils"
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
 
-export function NavbarMenu() {
+export function NavbarMenu({ navItems, locale }: { navItems: NavbarType[], locale: string }) {
+    const pathname = usePathname();
     return (
-        <NavigationMenu>
-            <NavigationMenuList className="gap-4">
-                <NavigationMenuItem>
-                    <Link href="/" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Bosh sahifa
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <Link href="/products" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Tovarlar
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <Link href="/docs" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Dokumentatsiya
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-            </NavigationMenuList>
-        </NavigationMenu>
+        <div>
+            <ul className="gap-6 flex flex-col md:flex-row">
+                {navItems.map((item) => (
+                    <li key={item.name} className={`border-b-2 ${pathname == `/${locale}${item.href === "/" ? "" : item.href}` ? "border-[#52A742]" : "border-transparent"} hover:border-b-2 hover:border-[#52A742] transition`}>
+                        <Link href={item.href}>
+                            <p className="font-medium text-base">
+                                {item.name}
+                            </p>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
 
-const ListItem = React.forwardRef<
-    React.ElementRef<"a">,
-    React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <a
-                    ref={ref}
-                    className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                        className
-                    )}
-                    {...props}
-                >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {children}
-                    </p>
-                </a>
-            </NavigationMenuLink>
-        </li>
-    )
-})
-ListItem.displayName = "ListItem"

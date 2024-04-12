@@ -12,7 +12,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function ModeToggle() {
+export function ModeToggle({ navAllText }: { navAllText: any }) {
     const { setTheme } = useTheme()
 
     return (
@@ -27,15 +27,15 @@ export function ModeToggle() {
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                     <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all pr-1" />
-                    Yorqin mavzu
+                    {navAllText?.light}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>
                     <Moon className="h-[1.2rem] w-[1.2rem] transition-all rotate-0 scale-100 pr-1" />
-                    Tungi mavzu
+                    {navAllText?.dark}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")}>
                     <Monitor className="h-[1.2rem] w-[1.2rem] transition-all rotate-0 scale-100 pr-1" />
-                    Sistema mavzusi
+                    {navAllText?.system}
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -1,0 +1,20 @@
+{
+    "Index": {
+        "title": "Hello world!",
+        "changeLanguageText": "Change language",
+        "websiteMode": {
+            "light": "Light mode",
+            "dark": "Dark mode",
+            "system": "System mode"
+        }
+    },
+    "Hero": {
+        "title": "Welcome to the online store!",
+        "description": "Here you can find the good things you need and buy them online!"
+    },
+    "Navbar": {
+        "Home": "Home",
+        "Products": "Products",
+        "Contacts": "Contacts"
+    }
+}
