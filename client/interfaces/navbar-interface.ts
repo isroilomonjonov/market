@@ -1,4 +1,4 @@
 export interface NavbarType {
-  href: "/products" | "/" | "/contacts";
+  href: "/products" | "/" | "/contacts" | "/products/[id]";
   name: string;
 }

@@ -13,6 +13,7 @@ export const pathnames = {
   // single external path can be provided.
   "/": "/",
   "/products": "/products",
+  "/products/[id]": "/products/[id]",
 
   // If locales use different paths, you can
   // specify each external path per locale.

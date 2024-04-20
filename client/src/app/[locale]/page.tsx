@@ -1,5 +1,6 @@
 import CardContainer from "@/components/card-container";
 import Hero from "@/components/hero";
+import InnerCardMainInfo from "@/components/inner-card-main-info";
 import { ToggleLanguage } from "@/components/toggle-language";
 import { useTranslations } from 'next-intl';
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
