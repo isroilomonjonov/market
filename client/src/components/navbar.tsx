@@ -19,7 +19,7 @@ const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: Na
     }, [pathname])
     return (
         <div className='flex justify-center mb-[61px]'>
-            <div className='container fixed z-10 top-0 pt-4 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
+            <div className='sm:container fixed z-10 top-0 pt-4 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
                 <button aria-label="barsicon" onClick={() => setOpen(!open)} className='md:hidden  p-1 md:p-2 scale-150 active:scale-100 transition-all duration-200'>{open ? <X className='text-eGlobalColorPrimary w-4 h-4 ' /> : <Menu className='text-eGlobalColorPrimary w-4 h-4 ' />}</button>
                 <div>
                     <Link href={"/"} className='flex gap-2'>
@@ -27,7 +27,7 @@ const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: Na
                         <h1 className="text-3xl font-medium ">Salatri.</h1>
                     </Link>
                 </div>
-                <div className={`gap-5 flex items-center justify-center absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
+                <div className={`gap-5 flex mt-2 pt-16 md:pt-0 md:mt-0 justify-center absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
                     <NavbarMenu navItems={navItems} locale={locale} />
                 </div>
                 <div className="flex gap-4">
