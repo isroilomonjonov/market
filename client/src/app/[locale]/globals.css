@@ -11,8 +11,8 @@ html {
   overflow: hidden;
 }
 html {
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
   box-sizing: border-box;
 }
 .text-animation {
@@ -20,9 +20,9 @@ html {
   animation: text-animation;
   animation-duration: 1s;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0.3px;
-}
+} */
 @keyframes text-animation {
   from {
     left: -100%;

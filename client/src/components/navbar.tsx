@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { ModeToggle } from './mode-toggle'
 import { NavbarMenu } from './navbar-menu'
-import { ShoppingBasket, Menu, X } from 'lucide-react'
+import { ShoppingBag, Menu, X, ShoppingCart, ShoppingBasket } from 'lucide-react'
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
@@ -27,12 +27,22 @@ const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: Na
                         <h1 className="text-3xl font-medium ">Salatri.</h1>
                     </Link>
                 </div>
-                <div className={`gap-5 flex mt-2 pt-16 md:pt-0 md:mt-0 justify-center absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
+                <div className={`gap-5 flex flex-col sm:flex-row sm:justify-center sm:items-center mt-6 pt-16 md:pt-0 md:mt-0 p-8 sm:p-0 absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
                     <NavbarMenu navItems={navItems} locale={locale} />
+                    <div className='flex items-center justify-center sm:hidden gap-4'>
+                        <ToggleLanguage locale={locale} navAllText={navAllText} />
+                        <ModeToggle navAllText={navAllText} />
+                    </div>
                 </div>
-                <div className="flex gap-4">
-                    <ToggleLanguage locale={locale} navAllText={navAllText} />
-                    <ModeToggle navAllText={navAllText} />
+                <div className="flex items-center justify-center gap-4">
+                    <div className='hidden sm:flex gap-4'>
+                        <ToggleLanguage locale={locale} navAllText={navAllText} />
+                        <ModeToggle navAllText={navAllText} />
+                    </div>
+                    <Link className='relative' href={"/basket"}>
+                        <span className='relative z-10 right-0 top-[80%] -left-0 bg-[#52A742] inline-block w-full text-center rounded-full text-white'>39</span>
+                        <ShoppingBasket className='relative -translate-y-1/3 w-8 h-8' />
+                    </Link>
                 </div>
             </div>
         </div>
