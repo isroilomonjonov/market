@@ -9,43 +9,47 @@ import Image from 'next/image'
 import { ToggleLanguage } from './toggle-language'
 import { useTranslations } from 'next-intl'
 import { NavbarType } from './../../interfaces/navbar-interface';
+import { useAppSelector } from '@/lib/store'
+import ReduxProvider from '@/app/[locale]/storeProvider'
+import ShoppingBasketComponent from './shopping-basket'
 
 const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: NavbarType[], navAllText: any }) => {
 
     const [open, setOpen] = useState(true);
     const pathname = usePathname();
+
     useEffect(() => {
         setOpen(false)
     }, [pathname])
     return (
-        <div className='flex justify-center mb-[61px]'>
-            <div className='sm:container fixed z-10 top-0 pt-4 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
-                <button aria-label="barsicon" onClick={() => setOpen(!open)} className='md:hidden  p-1 md:p-2 scale-150 active:scale-100 transition-all duration-200'>{open ? <X className='text-eGlobalColorPrimary w-4 h-4 ' /> : <Menu className='text-eGlobalColorPrimary w-4 h-4 ' />}</button>
-                <div>
-                    <Link href={"/"} className='flex gap-2'>
-                        <Image src="/logo.svg" alt="logo" className='w-[21px] h-[39px] mr-[5px]' width={100} height={100} />
-                        <h1 className="text-3xl font-medium ">Salatri.</h1>
-                    </Link>
-                </div>
-                <div className={`gap-5 flex flex-col sm:flex-row sm:justify-center sm:items-center mt-6 pt-16 md:pt-0 md:mt-0 p-8 sm:p-0 absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
-                    <NavbarMenu navItems={navItems} locale={locale} />
-                    <div className='flex items-center justify-center sm:hidden gap-4'>
-                        <ToggleLanguage locale={locale} navAllText={navAllText} />
-                        <ModeToggle navAllText={navAllText} />
+        <ReduxProvider>
+            <div className='flex justify-center mb-[61px]'>
+                <div className='sm:container fixed z-10 top-0 pt-4 flex items-center flex-wrap bg-white dark:bg-[#121212] justify-between p-3 border-b border-gray-200 dark:border-gray-600 w-[100vw]'>
+                    <button aria-label="barsicon" onClick={() => setOpen(!open)} className='md:hidden  p-1 md:p-2 scale-150 active:scale-100 transition-all duration-200'>{open ? <X className='text-eGlobalColorPrimary w-4 h-4 ' /> : <Menu className='text-eGlobalColorPrimary w-4 h-4 ' />}</button>
+                    <div>
+                        <Link href={"/"} className='flex gap-2'>
+                            <Image src="/logo.svg" alt="logo" className='w-[21px] h-[39px] mr-[5px]' width={100} height={100} />
+                            <h1 className="text-3xl font-medium ">Salatri.</h1>
+                        </Link>
                     </div>
-                </div>
-                <div className="flex items-center justify-center gap-4">
-                    <div className='hidden sm:flex gap-4'>
-                        <ToggleLanguage locale={locale} navAllText={navAllText} />
-                        <ModeToggle navAllText={navAllText} />
+                    <div className={`gap-5 flex flex-col sm:flex-row sm:justify-center sm:items-center mt-6 pt-16 md:pt-0 md:mt-0 p-8 sm:p-0 absolute bg-white dark:bg-[#121212] w-[100%] transition-[left] duration-500 left-[-100%] top-[61px] h-[100vh] !bg z-20 md:bg-tranparent md:z-auto  md:static md:w-auto md:flex-row md:h-auto md:flex md:gap-8 ${open ? "left-[0%]" : ""}`}>
+                        <NavbarMenu navItems={navItems} locale={locale} />
+                        <div className='flex items-center justify-center sm:hidden gap-4'>
+                            <ToggleLanguage locale={locale} navAllText={navAllText} />
+                            <ModeToggle navAllText={navAllText} />
+                        </div>
                     </div>
-                    <Link className='relative' href={"/basket"}>
-                        <span className='relative z-10 right-0 top-[80%] -left-0 bg-[#52A742] inline-block w-full text-center rounded-full text-white'>39</span>
-                        <ShoppingBasket className='relative -translate-y-1/3 w-8 h-8' />
-                    </Link>
+                    <div className="flex items-center justify-center gap-4">
+                        <div className='hidden sm:flex gap-4'>
+                            <ToggleLanguage locale={locale} navAllText={navAllText} />
+                            <ModeToggle navAllText={navAllText} />
+                        </div>
+                        <ShoppingBasketComponent />
+                    </div>
                 </div>
             </div>
-        </div>
+        </ReduxProvider>
+
     )
 }
 
