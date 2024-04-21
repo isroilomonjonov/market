@@ -18,7 +18,7 @@ const ShoppingBasketComponent = () => {
     }, [totalProducts]);
 
     return (
-        <Link className='relative' href={"/basket"}>
+        <Link className='relative' href={"/cart"}>
             <span className={`relative ${isBtnClicked ? "scaling" : ""} z-10 right-0 top-[80%] -left-0 bg-[#52A742] inline-block w-full text-center rounded-full text-white`}>{totalProducts}</span>
             <ShoppingBasket className='relative -translate-y-1/3 w-8 h-8' />
         </Link>

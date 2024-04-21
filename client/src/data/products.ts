@@ -3,15 +3,16 @@ export const ProductsData: ProductType[] = [
   {
     id: 6,
     title: "Grapes",
-    price: 3.49,
-    description: "Juicy and sweet grapes",
+    price: 3,
+    description:
+      "Juicy and sweet grapes for you to enjoy today with your friends and family in the morning or evening time.",
     image: "/images/grape.jpg",
     category: "Fruits",
   },
   {
     id: 7,
     title: "Orange Juice",
-    price: 3.99,
+    price: 4,
     description: "Freshly squeezed orange juice",
     image: "/images/orange-juice.webp",
     category: "Drinks",
@@ -19,7 +20,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 8,
     title: "Coffee",
-    price: 2.99,
+    price: 2,
     description: "Strong and delicious coffee",
     image: "/images/coffee.jpg",
     category: "Drinks",
@@ -27,7 +28,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 9,
     title: "Bread Slice",
-    price: 0.99,
+    price: 1,
     description: "Sliced bread",
     image: "/images/bread.webp",
     category: "Bakery",
@@ -35,7 +36,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 10,
     title: "Egg",
-    price: 1.49,
+    price: 2,
     description: "Fresh and delicious egg",
     image: "/images/egg.jpg",
     category: "Dairy",
@@ -43,7 +44,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 11,
     title: "Cake",
-    price: 5.99,
+    price: 8,
     description: "Moist and delicious cake",
     image: "/images/cake.webp",
     category: "Bakery",
@@ -51,7 +52,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 12,
     title: "Pear",
-    price: 2.49,
+    price: 5,
     description: "Juicy and sweet pear",
     image: "/images/pear.jpg",
     category: "Fruits",
@@ -59,7 +60,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 13,
     title: "Soda",
-    price: 2.99,
+    price: 4,
     description: "Refreshing and delicious soda",
     image: "/images/soda.jpg",
     category: "Drinks",
@@ -67,7 +68,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 14,
     title: "Cereal",
-    price: 3.99,
+    price: 92,
     description: "Tasty and nutritious cereal",
     image: "/images/cereal.jpeg",
     category: "Breakfast",
@@ -75,7 +76,7 @@ export const ProductsData: ProductType[] = [
   {
     id: 15,
     title: "Banana",
-    price: 1.49,
+    price: 7,
     description: "Juicy and sweet banana",
     image: "/images/banana.jpeg",
     category: "Fruits",
