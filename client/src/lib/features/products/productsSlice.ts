@@ -1,24 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-export interface IAuthState {
+export interface ProductState {
   products: any[];
   totalPrice: number;
   totalProducts: number;
 }
 
-const initialState: IAuthState = {
+const initialState: ProductState = {
   products: [],
   totalPrice: 0,
   totalProducts: 0,
 };
 
-export const authSlice = createSlice({
-  name: "auth",
+export const productReducer = createSlice({
+  name: "product",
   initialState,
   reducers: {
-    setAuthState: (state, action: PayloadAction<any[]>) => {
-      state.products = action.payload;
-    },
     addProductToState: (state, action: PayloadAction<any>) => {
       state.totalPrice = state.totalPrice + action.payload.price;
       state.totalProducts = state.totalProducts + 1;
@@ -58,6 +55,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuthState, addProductToState, deleteProductFromState } =
-  authSlice.actions;
-export const authReducer = authSlice.reducer;
+export const { addProductToState, deleteProductFromState } =
+  productReducer.actions;
+export const authReducer = productReducer.reducer;

@@ -5,7 +5,7 @@ import { ProductType } from '../../interfaces/product-interface';
 
 const AddAndRemoveBtn = ({ el }: { el: ProductType }) => {
     const dispatch = useAppDispatch();
-    const products = useAppSelector((state) => state.auth.products);
+    const products = useAppSelector((state) => state.products.products);
     const existingItem = products.findIndex(
         (product: any) => product.id === el.id
     );

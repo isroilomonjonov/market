@@ -20,12 +20,8 @@ const Users = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     role: {
-      type: DataTypes.ENUM(["SUPER_ADMIN","ADMIN","USER"]),
+      type: DataTypes.ENUM(["SUPER_ADMIN", "ADMIN"]),
       defaultValue: "ADMIN",
     },
     password: {
@@ -37,14 +33,6 @@ const Users = sequelize.define(
           msg: "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
         },
       },
-    },
-    phoneNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    isVerified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
     },
   },
   {

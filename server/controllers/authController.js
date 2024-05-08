@@ -4,6 +4,8 @@ const User = require("../models/Users");
 const AppError = require("../utils/AppError");
 const catchAsyn = require("../utils/catchAsync");
 const jwt = require("jsonwebtoken");
+const { compare, hash } = require("bcrypt");
+const Users = require("../models/Users");
 const generateToken = (payload, jwtSecret, options) => {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, jwtSecret, options, (err, token) => {
@@ -37,7 +39,8 @@ exports.register = catchAsyn(async (req, res, next) => {
   if (existedUser) {
     return next(new AppError("Bunday Usernameli foydalanuvchi mavjud ", 409));
   }
-  const newUser = await User.create(req.body);
+  const newPassword = await hash(req.body.password, 8);
+  const newUser = await User.create({ ...req.body, password: newPassword });
   const payload = {
     id: newUser.id,
     firstName: newUser.firstName,
@@ -78,13 +81,12 @@ exports.login = catchAsyn(async (req, res, next) => {
   if (!candidate) {
     return next(new AppError("Login yoki parol xato!", 400));
   }
-  const passwordIsMatch = password === candidate.password;
-  if (!passwordIsMatch) {
+  const passwordIsMatch = await compare(password, candidate.password);
+  const pastPasswordIsMatch = password == candidate.password;
+  if (!passwordIsMatch && !pastPasswordIsMatch) {
     return next(new AppError("Login yoki parol xato!", 400));
   }
-  if (!candidate.isVerified) {
-    return next(new AppError("Siz Adminlar Tomonidan Bloklangansiz", 401));
-  }
+
   const payload = {
     id: candidate.id,
     firstName: candidate.firstName,
@@ -108,5 +110,28 @@ exports.login = catchAsyn(async (req, res, next) => {
         token: token,
       },
     },
+  });
+});
+exports.repassword = catchAsyn(async (req, res, next) => {
+  const { password, newPassword, id } = req.body;
+  const byId = await Users.findByPk(id);
+
+  if (!byId) {
+    return next(new AppError("Bu user topilmadi!", 400));
+  }
+  const passwordIsMatch = await compare(password, byId.password);
+  const pastPasswordIsMatch = password == byId.password;
+  if (!passwordIsMatch && !pastPasswordIsMatch) {
+    return next(new AppError("Parol xato!", 400));
+  }
+  const updatedPassword = await hash(newPassword, 8);
+  await byId.update({
+    password: updatedPassword,
+  });
+
+  res.json({
+    status: "success",
+    message: "Parolingiz muvaffaqiyatli o'zgartirildi!",
+    error: null,
   });
 });

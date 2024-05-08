@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from "@/lib/store";
 import AddAndRemoveBtn from './addAndRemoveBtn';
 const InnerCardMainInfo = ({ el }: { el: ProductType }) => {
     const dispatch = useAppDispatch();
-    const products = useAppSelector((state) => state.auth.products);
-    const totalPrice = useAppSelector((state) => state.auth.totalPrice);
+    const products = useAppSelector((state) => state.products.products);
+    const totalPrice = useAppSelector((state) => state.products.totalPrice);
     const exist = products.find((product: any) => product.id === el.id)
     console.log(products, totalPrice);
     return (

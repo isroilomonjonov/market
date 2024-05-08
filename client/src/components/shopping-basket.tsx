@@ -5,8 +5,8 @@ import { useAppSelector } from '@/lib/store';
 import { ShoppingBag, Menu, X, ShoppingCart, ShoppingBasket } from 'lucide-react'
 import ReactCSSTransitionGroup from 'react-transition-group';
 const ShoppingBasketComponent = () => {
-    const products = useAppSelector((state) => state.auth.products);
-    const totalProducts = useAppSelector((state) => state.auth.totalProducts);
+    const products = useAppSelector((state) => state.products.products);
+    const totalProducts = useAppSelector((state) => state.products.totalProducts);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
     useEffect(() => {
         if (totalProducts === 0) return;

@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const AppError = require("../utils/AppError");
 const { Op } = require("sequelize");
 const QueryBuilder = require("../utils/queryBuilder");
-
+const { compare, hash } = require("bcrypt");
 exports.getAllUser = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
 
@@ -44,7 +44,7 @@ exports.updateUserStatus = catchAsyn(async (req, res) => {
 });
 exports.getById = catchAsyn(async (req, res, next) => {
   const { id } = req.params;
-  const byId = await User.findByPk(id);
+  const byId = await Users.findByPk(id);
   if (!byId) {
     return next(new AppError("Bunday ID li Foydalanuvchi topilmadi"));
   }
@@ -58,7 +58,7 @@ exports.getById = catchAsyn(async (req, res, next) => {
 });
 exports.createUser = catchAsyn(async (req, res) => {
   const validationErrors = validationResult(req);
-
+  const newPassword = await hash(req.body.password, 8);
   if (!validationErrors.isEmpty()) {
     const err = new AppError("Validation error", 400);
     err.name = "validationError";
@@ -67,8 +67,7 @@ exports.createUser = catchAsyn(async (req, res) => {
     return next(err);
   }
 
-  req.body.username.toLowerCase();
-  const user = await Users.create(req.body);
+  const user = await Users.create({ ...req.body, password: newPassword });
   res.json({
     status: "success",
     message: "Foydalanuvchi yaratildi",
@@ -77,8 +76,9 @@ exports.createUser = catchAsyn(async (req, res) => {
     },
   });
 });
-exports.updateUser = catchAsyn(async (req, res) => {
+exports.updateUser = catchAsyn(async (req, res, next) => {
   const validationErrors = validationResult(req);
+  // const newPassword = await hash(req.body.password, 8);
 
   if (!validationErrors.isEmpty()) {
     const err = new AppError("Validation error", 400);
@@ -90,13 +90,20 @@ exports.updateUser = catchAsyn(async (req, res) => {
 
   const { id } = req.params;
 
-  const byId = await User.findByPk(id);
+  const byId = await Users.findByPk(id);
 
   if (!byId) {
     return next(new AppError("Bunday ID li Foydalanuvchi topilmadi"));
   }
-  req.body.username.toLowerCase();
-  const updatedUser = await byId.update(req.body);
+  const passwordIsMatch = await compare(req.body.password, byId.password);
+  const pastPasswordIsMatch = req.body.password == byId.password;
+  if (!passwordIsMatch && !pastPasswordIsMatch) {
+    return next(new AppError("Parol hato!", 400));
+  }
+  const updatedUser = await byId.update({
+    ...req.body,
+    password: byId.password,
+  });
   res.json({
     status: "success",
     message: "Foydalanuvchi ma'lumotlari tahrirlandi",
@@ -107,7 +114,7 @@ exports.updateUser = catchAsyn(async (req, res) => {
 });
 exports.deleteUser = catchAsyn(async (req, res) => {
   const { id } = req.params;
-  const byId = await User.findByPk(id);
+  const byId = await Users.findByPk(id);
 
   if (!byId) {
     return next(new AppError("Bunday ID li Kurs topilmadi"));
@@ -119,5 +126,26 @@ exports.deleteUser = catchAsyn(async (req, res) => {
     status: "success",
     message: "User o'chirildi",
     data: null,
+  });
+});
+exports.getUser = catchAsyn(async (req, res, next) => {
+  console.log(req.user);
+  const byId = await Users.findByPk(req.user.id);
+  if (!byId) {
+    return next(new AppError("Bunday ID li Foydalanuvchi topilmadi"));
+  }
+  const user = {
+    id: byId.id,
+    firstName: byId.firstName,
+    username: byId.username,
+    lastName: byId.lastName,
+    role: byId.role,
+  };
+  res.status(201).json({
+    status: "success",
+    message: "",
+    data: {
+      byId: user,
+    },
   });
 });

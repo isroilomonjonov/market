@@ -4,8 +4,8 @@ import CartProduct from './cart-product';
 import { CircleArrowRight } from 'lucide-react';
 
 const CartProductContainer = () => {
-    const products = useAppSelector((state) => state.auth.products);
-    const totalPrice = useAppSelector((state) => state.auth.totalPrice);
+    const products = useAppSelector((state) => state.products.products);
+    const totalPrice = useAppSelector((state) => state.products.totalPrice);
     return (
         <div className="pt-12">
             <h2 className="text-2xl font-bold mb-4">Cart</h2>

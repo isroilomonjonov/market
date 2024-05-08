@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl'
 import { NavbarType } from './../../interfaces/navbar-interface';
 import { useAppSelector } from '@/lib/store'
 import ReduxProvider from '@/app/[locale]/storeProvider'
-import ShoppingBasketComponent from './shopping-basket'
+import LogOutComponent from './logOutComponent'
 
 const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: NavbarType[], navAllText: any }) => {
 
@@ -44,7 +44,7 @@ const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: Na
                             <ToggleLanguage locale={locale} navAllText={navAllText} />
                             <ModeToggle navAllText={navAllText} />
                         </div>
-                        <ShoppingBasketComponent />
+                        <LogOutComponent />
                     </div>
                 </div>
             </div>

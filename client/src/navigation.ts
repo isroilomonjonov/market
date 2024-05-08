@@ -14,6 +14,7 @@ export const pathnames = {
   "/": "/",
   "/products": "/products",
   "/products/[id]": "/products/[id]",
+  "/settings": "/settings",
 
   // If locales use different paths, you can
   // specify each external path per locale.

@@ -10,7 +10,7 @@ const Card = ({ el }: { el: ProductType }) => {
         /* Optional options */
         threshold: 0,
     });
-    const products = useAppSelector((state) => state.auth.products);
+    const products = useAppSelector((state) => state.products.products);
     const existingItem = products.findIndex((product: any) => product.id === el.id);
     return (
         // <Link className='w-full relative' href={{
