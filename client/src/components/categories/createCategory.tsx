@@ -40,7 +40,7 @@ const CreateCategory = ({ closeDialog, id, getAll }: { closeDialog: () => void, 
     const onSubmit = async (data: any) => {
         try {
             const res = await axiosInstance({
-                url: `/categories/${id}`,
+                url: id ? `/categories/${id}` : "/categories",
                 data,
                 method: id ? "PATCH" : "POST"
             });

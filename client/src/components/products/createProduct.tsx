@@ -1,7 +1,6 @@
 'use client'
 import axiosInstance from '@/utils/axiosInstance'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -13,6 +12,8 @@ import ImageUploader from '../imageUploader'
 import MaskedInput from 'react-text-mask';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import { toast } from '../ui/use-toast'
+import { useRouter } from '@/navigation'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 const formSchema = z.object({
     title: z.string({ required_error: "Mah'sulot nomini yozishingiz shart!", }).min(2, { message: "Eng kamida 2ta harfli mahsulot bo'lishi kerak!" }),
@@ -33,11 +34,7 @@ export interface ImageType {
 }
 const CreateProduct = () => {
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
-    const [editorContent, setEditorContent] = useState('');
 
-    const handleChange = (value: any) => {
-        setEditorContent(value);
-    };
     const [categories, setCategories] = useState([])
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -65,24 +62,24 @@ const CreateProduct = () => {
         }
     }
     const onSubmit = async (data: any) => {
-        console.log({ ...data, image: selectedImage?.id });
-
-        // try {
-        //     const res = await axiosInstance({
-        //         url: "/auth/login",
-        //         data,
-        //         method: "POST"
-        //     });
-        //     toast({
-        //         variant: "default",
-        //         title: "Mahsulot yaratildi",
-        //     })
-        // } catch (error: any) {
-        //     toast({
-        //         variant: "destructive",
-        //         title: error.response.data.message,
-        //     })
-        // }
+        console.log({ ...data, attachmentId: selectedImage?.id, image: selectedImage?.name });
+        try {
+            const res = await axiosInstance({
+                url: "/products",
+                data: { ...data, attachmentId: selectedImage?.id, image: selectedImage?.name, categoryId: Number(data.categoryId) },
+                method: "POST"
+            });
+            router.push("/products-for-admin");
+            toast({
+                variant: "default",
+                title: "Mahsulot yaratildi",
+            })
+        } catch (error: any) {
+            toast({
+                variant: "destructive",
+                title: error.response.data.message,
+            })
+        }
     }
     const modules = useMemo(() => ({
         toolbar: [
@@ -91,8 +88,8 @@ const CreateProduct = () => {
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ 'color': [] }, { 'background': [] }],
             [{ 'align': [] }],
-            ['link', 'image', 'video'],
-            ['clean']                                         // remove formatting button
+            ['link'],
+            ['clean']
         ],
     }), []);
 
@@ -101,7 +98,7 @@ const CreateProduct = () => {
         'header', 'font', 'size',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
-        'link', 'image', 'video', 'color', 'background', 'align'
+        'link', 'color', 'background', 'align'
     ];
     return (
         <div>
@@ -115,7 +112,6 @@ const CreateProduct = () => {
                                 <FormLabel>Mahsulot nomi</FormLabel>
                                 <FormControl>
                                     <Input type={'text'} {...field} />
-
                                 </FormControl>
                                 <FormDescription>Mahsulot nomini kiriting!</FormDescription>
                                 <FormMessage />
@@ -146,7 +142,6 @@ const CreateProduct = () => {
                                 <FormLabel>Mahsulot narxi 10.000!</FormLabel>
                                 <FormControl>
                                     <Input type='text' {...field} />
-                                    {/* <MaskedInput mask={["99.999.999/9999-99"]} className='flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300' {...field} /> */}
                                 </FormControl>
                                 <FormDescription>Mahsulot narxini yozing!</FormDescription>
                                 <FormMessage />
