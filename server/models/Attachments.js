@@ -26,8 +26,10 @@ const Attachments = sequelize.define(
   },
   { underscored: true }
 );
-Attachments.hasMany(Albums);
-Albums.belongsTo(Attachments);
-Products.hasMany(Albums);
-Albums.belongsTo(Products);
+// Attachments.hasMany(Albums);
+// Albums.belongsTo(Attachments);
+// Products.hasMany(Albums);
+// Albums.belongsTo(Products);
+Attachments.hasMany(Products);
+Products.belongsTo(Attachments);
 module.exports = Attachments;

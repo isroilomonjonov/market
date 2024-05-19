@@ -45,6 +45,12 @@ const LogOutComponent = () => {
                         <DropdownMenuItem className='mb-2 p-1'>
                             <Link href={'/settings'}>Settings</Link>
                         </DropdownMenuItem>
+                        <DropdownMenuItem className='mb-2 p-1'>
+                            <Link href={'/products-for-admin'}>Products</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className='mb-2 p-1'>
+                            <Link href={'/categories'}>Kategoriyalar</Link>
+                        </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
