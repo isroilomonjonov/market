@@ -14,6 +14,8 @@ import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from '../ui/use-toast'
 import { useRouter } from '@/navigation'
+import { ProductType } from '../../../interfaces/product-interface'
+import { CategoryType } from '../../../interfaces/category-interface'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 const formSchema = z.object({
     title: z.string({ required_error: "Mah'sulot nomini yozishingiz shart!", }).min(2, { message: "Eng kamida 2ta harfli mahsulot bo'lishi kerak!" }),
@@ -32,7 +34,7 @@ export interface ImageType {
     type: string;
     updatedAt: string;
 }
-const CreateProduct = () => {
+const CreateProduct = ({ product }: { product?: ProductType }) => {
     const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
 
     const [categories, setCategories] = useState([])
@@ -49,14 +51,22 @@ const CreateProduct = () => {
     })
     useEffect(() => {
         getCategories()
-    }, [])
+        if (product) {
+            console.log(product.category.id);
+
+            form.reset({ ...product, categoryId: String(product.category.id) })
+            setSelectedImage(product.attachment)
+            console.log({ ...product, categoryId: String(product.category.id) });
+
+        }
+    }, [product])
     const getCategories = async () => {
         try {
             const res = await axiosInstance({
                 url: "/categories",
                 method: "GET"
             });
-            setCategories(res.data.data.allCategory.rows);
+            setCategories(res.data.data.allCategory.rows.map((el: CategoryType) => { return { ...el, id: String(el.id) } }));
         } catch (error: any) {
             console.log(error);
         }
@@ -65,14 +75,14 @@ const CreateProduct = () => {
         console.log({ ...data, attachmentId: selectedImage?.id, image: selectedImage?.name });
         try {
             const res = await axiosInstance({
-                url: "/products",
+                url: product ? `/products/${product.id}` : "/products",
                 data: { ...data, attachmentId: selectedImage?.id, image: selectedImage?.name, categoryId: Number(data.categoryId) },
-                method: "POST"
+                method: product ? "PATCH" : "POST"
             });
             router.push("/products-for-admin");
             toast({
                 variant: "default",
-                title: "Mahsulot yaratildi",
+                title: product ? "Mahsulot ma'lumotlari yangilandi" : "Mahsulot yaratildi",
             })
         } catch (error: any) {
             toast({
@@ -168,14 +178,15 @@ const CreateProduct = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Kategoriya</FormLabel>
-                                <Select onValueChange={field.onChange}>
+                                {product && <p>Oldingi kategoriya <span className='text-xl font-bold'>{product?.category?.title}</span></p>}
+                                <Select onValueChange={field.onChange} defaultValue={String(product?.category?.id)}>
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {categories.map((category: any) => <SelectItem key={category.id} value={String(category.id)}>{category.title}</SelectItem>)}
+                                        {categories.map((category: CategoryType) => <SelectItem key={category.id} value={String(category.id)}>{category.title}</SelectItem>)}
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
@@ -185,7 +196,7 @@ const CreateProduct = () => {
                             </FormItem>)}
                     />
                     <ImageUploader selectedImage={selectedImage} setSelectedImage={(e: ImageType | null) => { setSelectedImage(e); return {}; }} />
-                    <Button type="submit">Yaratish</Button>
+                    <Button type="submit">{product ? "Yangilash" : "Yaratish"}</Button>
                 </form>
             </Form>
         </div>

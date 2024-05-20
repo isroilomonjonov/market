@@ -1,8 +1,21 @@
 export interface ProductType {
   id: number;
   title: string;
-  price: number;
+  price: string;
   description: string;
-  category: string;
+  category: {
+    id: number;
+    title: string;
+  };
   image: string;
+  attachment: {
+    createdAt: string;
+    id: number;
+    isConnect: boolean;
+    name: string;
+    originalName: string;
+    size: string;
+    type: string;
+    updatedAt: string;
+  };
 }

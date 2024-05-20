@@ -2,6 +2,8 @@ const Products = require("../models/Products");
 const catchAsyn = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const QueryBuilder = require("../utils/queryBuilder");
+const Categories = require("../models/Categories");
+const Attachments = require("../models/Attachments");
 
 exports.getAllProduct = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
@@ -9,6 +11,7 @@ exports.getAllProduct = catchAsyn(async (req, res, next) => {
   queryBuilder.filter().paginate().limitFields().search(["title"]).sort();
   let allProduct = await Products.findAndCountAll({
     ...queryBuilder.queryOptions,
+    include: [{ model: Categories }, { model: Attachments }],
   });
   allProduct = queryBuilder.createPage(allProduct);
   res.json({
@@ -22,7 +25,12 @@ exports.getAllProduct = catchAsyn(async (req, res, next) => {
 
 exports.getById = catchAsyn(async (req, res, next) => {
   const { id } = req.params;
-  const byId = await Products.findByPk(id);
+  const byId = await Products.findOne({
+    where: {
+      id: id,
+    },
+    include: [{ model: Categories }, { model: Attachments }],
+  });
   if (!byId) {
     return next(new AppError("Bunday ID li Product topilmadi"));
   }

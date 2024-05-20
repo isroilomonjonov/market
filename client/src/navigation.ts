@@ -16,6 +16,7 @@ export const pathnames = {
   "/products/[id]": "/products/[id]",
   "/settings": "/settings",
   "/products-for-admin": "/products-for-admin",
+  "/products-for-admin/[id]": "/products-for-admin/[id]",
   "/products-for-admin/new": "/products-for-admin/new",
   "/categories": "/categories",
 

@@ -12,7 +12,8 @@ exports.createFoodImg = catchAsync(async (req, res, next) => {
   );
   fs.unlink(req.file.path, (err) => {
     if (err) {
-      throw err;
+      console.error("Faylni o'chirishda xatolik yuz berdi:", err);
+      return;
     }
     console.log("Delete file successfully.");
   });
