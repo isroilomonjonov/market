@@ -3,6 +3,8 @@ import Hero from "@/components/hero";
 import InnerCardMainInfo from "@/components/inner-card-main-info";
 import { ToggleLanguage } from "@/components/toggle-language";
 import { useTranslations } from 'next-intl';
+import { ProductType } from "../../../interfaces/product-interface";
+import { ProductsService } from "@/services/products.service";
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('Index');
   const tHero = useTranslations('Hero');

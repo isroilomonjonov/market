@@ -97,7 +97,6 @@ const CreateProduct = ({ product }: { product?: ProductType }) => {
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ 'color': [] }, { 'background': [] }],
-            [{ 'align': [] }],
             ['link'],
             ['clean']
         ],

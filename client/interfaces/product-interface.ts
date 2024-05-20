@@ -3,6 +3,7 @@ export interface ProductType {
   title: string;
   price: string;
   description: string;
+  discount: string;
   category: {
     id: number;
     title: string;

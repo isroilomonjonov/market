@@ -4,14 +4,23 @@ import { useInView } from 'react-intersection-observer';
 import { ProductType } from '../../interfaces/product-interface';
 import { Link } from '@/navigation';
 import { useAppSelector } from '@/lib/store';
+import { imageURL } from '@/utils/axiosInstance';
 
 const Card = ({ el }: { el: ProductType }) => {
+    console.log(el);
+
     const { ref, inView, entry } = useInView({
         /* Optional options */
         threshold: 0,
     });
     const products = useAppSelector((state) => state.products.products);
     const existingItem = products.findIndex((product: any) => product.id === el.id);
+    const formatter = new Intl.NumberFormat('uz-UZ', {
+        style: 'currency',
+        currency: 'UZS',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
     return (
         // <Link className='w-full relative' href={{
         //     pathname: '/products/[id]',
@@ -24,11 +33,12 @@ const Card = ({ el }: { el: ProductType }) => {
                 pathname: '/products/[id]',
                 params: { id: el.id }
             }} className="block relative h-full rounded overflow-hidden">
-                <img alt="ecommerce" className="object-cover object-center w-full h-full max-h-48 block" src={el.image} />
+                <img alt="ecommerce" className="object-cover object-center w-full h-full max-h-48 block" src={`${imageURL}${el.image}`} />
                 <div className="mt-4 pb-4 rounded  dark:border-b">
-                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{el.category}</h3>
-                    <h2 className="title-font text-lg font-medium">{el.title}</h2>
-                    <p className="mt-1">${el.price}</p>
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{el.category.title}</h3>
+                    <h2 className="title-font text-2xl font-medium">{el.title}</h2>
+                    <p className="mt-1 text-xl font-bold">{formatter.format(Number(el.discount))}</p>
+                    <p className="mt-1 line-through decoration-red-600 opacity-70">{formatter.format(Number(el.price))}</p>
                 </div>
             </Link>
         </div >

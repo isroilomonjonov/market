@@ -1,10 +1,14 @@
 import CardContainer from '@/components/card-container';
 import React from 'react'
+import { ProductType } from '../../../../interfaces/product-interface';
+import { ProductsService } from '@/services/products.service';
 
-const Products = () => {
+const Products = async () => {
+    const data: ProductType[] = await ProductsService.getAllProducts();
+
     return (
         <div>
-            <CardContainer />
+            <CardContainer data={data} />
         </div>
     )
 }
