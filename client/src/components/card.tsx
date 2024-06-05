@@ -7,10 +7,7 @@ import { useAppSelector } from '@/lib/store';
 import { imageURL } from '@/utils/axiosInstance';
 
 const Card = ({ el }: { el: ProductType }) => {
-    console.log(el);
-
     const { ref, inView, entry } = useInView({
-        /* Optional options */
         threshold: 0,
     });
     const products = useAppSelector((state) => state.products.products);
@@ -22,11 +19,6 @@ const Card = ({ el }: { el: ProductType }) => {
         maximumFractionDigits: 2
     });
     return (
-        // <Link className='w-full relative' href={{
-        //     pathname: '/products/[id]',
-        //     params: { id: el.id }
-        // }}>
-
         <div ref={ref} className={`${inView ? "animation-diff" : ""} relative cursor-pointer w-full max-w-96 hover:scale-105 transition-transform ease-out duration-200 rounded shadow-2xl`}>
             {products[existingItem]?.quantity > 0 && <span className={`absolute z-[2] -top-[10%] -left-5 bg-[#52A742] flex items-center justify-center w-16 h-16 text-center rounded-full text-white`}>{products[existingItem].quantity}</span>}
             <Link href={{
@@ -42,7 +34,6 @@ const Card = ({ el }: { el: ProductType }) => {
                 </div>
             </Link>
         </div >
-        // </Link>
     )
 }
 

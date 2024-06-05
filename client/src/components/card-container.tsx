@@ -14,7 +14,6 @@ const CardContainer = ({ data }: { data?: ProductType[] }) => {
             getAllProducts();
         }
     }, [data])
-    console.log(data);
     const getAllProducts = async () => {
         try {
             const res = await axiosInstance({
@@ -30,8 +29,8 @@ const CardContainer = ({ data }: { data?: ProductType[] }) => {
         <ReduxProvider>
             <div className="container px-5 py-24 mx-auto text-center">
 
-                <div className="flex flex-wrap items-center justify-center gap-12">{data ? data.map((i) => <Card key={i.id} el={i} />) : products.map((i) => <Card key={i.id} el={i} />)}</div>
-                <PaginationDemo />
+                {data&&<><div className="flex flex-wrap items-center justify-center gap-12">{data ? data.map((i) => <Card key={i.id} el={i} />) : products.map((i) => <Card key={i.id} el={i} />)}</div>
+                <PaginationDemo /></>}
 
             </div>
         </ReduxProvider>

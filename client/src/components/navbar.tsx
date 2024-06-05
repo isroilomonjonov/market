@@ -15,7 +15,7 @@ import LogOutComponent from './logOutComponent'
 
 const Navbar = ({ locale, navItems, navAllText }: { locale: string, navItems: NavbarType[], navAllText: any }) => {
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {

@@ -4,7 +4,6 @@ const catchAsync = require("./catchAsync");
 const uuid = require("uuid");
 const { compare, hash } = require("bcrypt");
 module.exports = catchAsync(async () => {
-  const newUUID = uuid.v4();
   const superAdminCount = await Users.count();
   const newPassword = await hash("isroilomon9999", 8);
   if (superAdminCount === 0) {
