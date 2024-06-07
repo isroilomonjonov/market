@@ -1,16 +1,18 @@
-'use client'
-import React from 'react'
-import ReduxProvider from '../storeProvider'
-import CartProductContainer from '@/components/cart-product-container'
+import CartContainer from "@/components/cart/cart"
+import { useTranslations } from 'next-intl';
 
 const Cart = () => {
+    const tCart = useTranslations('Cart');
+    const cartText = {
+        title: tCart('title'),
+        order: tCart('order'),
+        products: tCart('products'),
+        name: tCart('name'),
+        phoneNumber: tCart('phoneNumber'),
+        orderCompletedSuccesufly: tCart('orderCompletedSuccesufly'),
+    }
     return (
-        <ReduxProvider>
-            <div className='container'>
-                <CartProductContainer />
-            </div>
-        </ReduxProvider>
-
+        <CartContainer text={cartText} />
     )
 }
 

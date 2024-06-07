@@ -1,10 +1,6 @@
 import CardContainer from "@/components/card-container";
 import Hero from "@/components/hero";
-import InnerCardMainInfo from "@/components/inner-card-main-info";
-import { ToggleLanguage } from "@/components/toggle-language";
 import { useTranslations } from 'next-intl';
-import { ProductType } from "../../../interfaces/product-interface";
-import { ProductsService } from "@/services/products.service";
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('Index');
   const tHero = useTranslations('Hero');
@@ -12,10 +8,24 @@ export default function Home({ params: { locale } }: { params: { locale: string 
     title: tHero('title'),
     description: tHero('description')
   }
+  const tNavbar = useTranslations('Navbar')
+  const tProducts = useTranslations('Products')
+  const tPagination = useTranslations('Pagination')
+  const productText = {
+    Products: tNavbar('Products'),
+    Search: tProducts('Search'),
+    Categories: tProducts('Categories'),
+    All: tProducts('All'),
+    NoProducts: tProducts('NoProducts'),
+    Next: tPagination('Next'),
+    Previous: tPagination('Previous'),
+  }
   return (
     <div className="">
       <Hero heroText={heroText} />
-      <CardContainer />
+      <CardContainer productText={productText} />
+
+      {/* <CardContainer productText={productText||""}/> */}
     </div>
   );
 }

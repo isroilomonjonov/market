@@ -8,12 +8,12 @@ const Attachments = require("../models/Attachments");
 exports.getAllProduct = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
 
-  queryBuilder.filter().paginate().limitFields().search(["title"]).sort();
+  queryBuilder.filter().paginate().search(["title"]).sort();
   let allProduct = await Products.findAndCountAll({
     ...queryBuilder.queryOptions,
     include: [{ model: Categories }, { model: Attachments }],
   });
-  allProduct = queryBuilder.createPage(allProduct);
+  allProduct = queryBuilder.createPagination(allProduct);
   res.json({
     status: "success",
     message: "",
@@ -43,6 +43,9 @@ exports.getById = catchAsyn(async (req, res, next) => {
   });
 });
 exports.createProduct = catchAsyn(async (req, res) => {
+  if (!req.body.discount.length > 0) {
+    delete req.body.discount;
+  }
   const Product = await Products.create(req.body);
   res.json({
     status: "success",

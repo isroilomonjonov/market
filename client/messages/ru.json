@@ -16,5 +16,23 @@
         "Home": "Главный",
         "Products": "Продукты",
         "Contacts": "Контакты"
+    },
+    "Products": {
+        "Search": "Поиск по названию продукта!",
+        "Categories": "Категории",
+        "All": "Все",
+        "NoProducts": "Продукты отсутствуют!"
+    },
+    "Pagination": {
+        "Next": "Далее",
+        "Previous": "Назад"
+    },
+    "Cart": {
+        "title": "Корзина",
+        "order": "Заказать",
+        "products": "Товары",
+        "name": "Ваше имя!",
+        "phoneNumber": "Ваш номер телефона!",
+        "orderCompletedSuccesufly": "Заказ оформлен! Скоро с вами свяжутся!"
     }
 }

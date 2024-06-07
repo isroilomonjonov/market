@@ -2,6 +2,8 @@ const Orders = require("../models/Orders");
 const catchAsyn = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const QueryBuilder = require("../utils/queryBuilder");
+const OrderItems = require("../models/OrderItems");
+const { Op } = require("sequelize");
 
 exports.getAllOrder = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
@@ -35,12 +37,35 @@ exports.getById = catchAsyn(async (req, res, next) => {
   });
 });
 exports.createOrder = catchAsyn(async (req, res) => {
-  const Order = await Orders.create(req.body);
+  const { items, name, phoneNumber } = req.body;
+  let newOrder;
+  newOrder = await Orders.create({
+    name,
+    phoneNumber,
+  });
+  const itemArr = [];
+
+  items?.forEach((item) => {
+    return itemArr.push({
+      subtotal: item.discount
+        ? item.discount * item.quantity
+        : item.price * item.quantity,
+      quantity: item.quantity,
+      productId: item.id,
+      orderId: newOrder.id,
+    });
+  });
+  await OrderItems.bulkCreate(itemArr);
+  const totalMoney = await OrderItems.sum("subtotal", {
+    where: { orderId: { [Op.eq]: newOrder.id } },
+  });
+  await newOrder.update({ totalPrice: totalMoney });
+
   res.json({
     status: "success",
     message: "Order yaratildi",
     data: {
-      Order,
+      newOrder,
     },
   });
 });

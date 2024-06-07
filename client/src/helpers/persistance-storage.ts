@@ -6,7 +6,7 @@ export const setItem = (key: string, data: any) => {
 
 export const getItem = (key: string) => {
   try {
-    return localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key) || "");
   } catch (error) {}
 };
 

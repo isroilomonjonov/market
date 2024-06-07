@@ -19,7 +19,7 @@ app.use("/api/v1/users", authMiddleware, userRoutes);
 app.use("/api/v1/attachments", authMiddleware, attachmentRoutes);
 app.use("/api/v1/categories", categoryRoutes);
 app.use("/api/v1/products", productRoutes);
-app.use("/api/v1/order", authMiddleware, orderRoutes);
+app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/orderitem", authMiddleware, orderItemRoutes);
 app.use("/api/v1/attachments", authMiddleware, attachmentRoutes);
 app.use("/api/v1/ablums", authMiddleware, albumRoutes);

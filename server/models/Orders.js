@@ -13,10 +13,13 @@ const Orders = sequelize.define(
     },
     totalPrice: {
       type: DataTypes.BIGINT,
+    },
+    name: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    totalProducts: {
-      type: DataTypes.INTEGER,
+    phoneNumber: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     status: {

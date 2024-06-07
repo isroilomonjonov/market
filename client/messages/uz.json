@@ -16,5 +16,23 @@
         "Home": "Bosh sahifa",
         "Products": "Mahsulotlar",
         "Contacts": "Aloqa"
+    },
+    "Products": {
+        "Search": "Qidirish mahsulot nomi orqali!",
+        "Categories": "Kategoriyalar",
+        "All": "Barchasi",
+        "NoProducts": "Mahsulotlar mavjud emas!"
+    },
+    "Pagination": {
+        "Next": "Keyingi",
+        "Previous": "Oldingi"
+    },
+    "Cart": {
+        "title": "Savat",
+        "order": "Buyurtma berish",
+        "products": "Mahsulotlar",
+        "name": "Ismingizni kiriting!",
+        "phoneNumber": "Telefon raqamingizni kiriting!",
+        "orderCompletedSuccesufly": "Buyurtma qabul qilindi! Tez orada aloqaga chiqamiz!"
     }
 }

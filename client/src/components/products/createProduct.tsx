@@ -73,6 +73,9 @@ const CreateProduct = ({ product }: { product?: ProductType }) => {
     }
     const onSubmit = async (data: any) => {
         console.log({ ...data, attachmentId: selectedImage?.id, image: selectedImage?.name });
+        if (data.discount.length > 0) {
+            delete data.discount
+        }
         try {
             const res = await axiosInstance({
                 url: product ? `/products/${product.id}` : "/products",

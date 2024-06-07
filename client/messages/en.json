@@ -16,5 +16,23 @@
         "Home": "Home",
         "Products": "Products",
         "Contacts": "Contacts"
+    },
+    "Products": {
+        "Search": "Search products by name!",
+        "Categories": "Categories",
+        "All": "All",
+        "NoProducts": "No products found!"
+    },
+    "Pagination": {
+        "Next": "Next",
+        "Previous": "Previous"
+    },
+    "Cart": {
+        "title": "Cart",
+        "order": "Order",
+        "products": "Products",
+        "name": "Your name!",
+        "phoneNumber": "Your phone number!",
+        "orderCompletedSuccesufly": "Order completed successfully! We will contact you soon!"
     }
 }

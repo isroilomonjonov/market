@@ -26,6 +26,7 @@ const Products = sequelize.define(
     },
     discount: {
       type: DataTypes.BIGINT,
+      defaultValue: null,
     },
   },
   { underscored: true }

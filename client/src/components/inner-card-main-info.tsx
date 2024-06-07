@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { ProductType } from '../../interfaces/product-interface'
 import { addProductToState } from "@/lib/features/products/productsSlice";
@@ -34,8 +35,8 @@ const InnerCardMainInfo = ({ el }: { el: ProductType }) => {
                         </div>
                         <div className="flex justify-between items-center">
                             <div className="flex flex-col">
-                                <p className="mt-1 text-xl font-bold">{formatter.format(Number(el.discount))}</p>
-                                <p className="mt-1 line-through decoration-red-600 opacity-70">{formatter.format(Number(el.price))}</p>
+                                {!el.discount ? <p className="mt-1 text-xl font-bold">{formatter.format(Number(el.price))}</p> : <><p className="mt-1 text-xl font-bold">{formatter.format(Number(el.discount))}</p>
+                                    <p className="mt-1 line-through decoration-red-600 opacity-70">{formatter.format(Number(el.price))}</p></>}
                             </div>
                             {exist ? <AddAndRemoveBtn el={el} /> : <button onClick={() => dispatch(addProductToState(el))} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Buyurtma berish</button>}
                         </div>
