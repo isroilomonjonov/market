@@ -88,7 +88,7 @@ const CardContainer = ({ productText }: { productText: any }) => {
                 </div>
                 {slider && <div className="loader h-screen">Loading....</div>}
                 {(products.length > 0 && pagination && !slider) ? <><div className="flex flex-wrap items-center justify-center gap-12">{products.map((i) => <Card key={i.id} el={i} />)}</div>
-                    <PaginationDemo productText={productText} pagination={pagination} /></> : <p>{productText.NoProducts}</p>}
+                    <PaginationDemo productText={productText} pagination={pagination} pathname='/products' /></> : <p>{productText.NoProducts}</p>}
             </div>
         </ReduxProvider>
     )

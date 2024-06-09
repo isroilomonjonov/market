@@ -24,6 +24,7 @@ export const pathnames = {
   // specify each external path per locale.
   "/contacts": "/contacts",
   "/cart": "/cart",
+  "/orders": "/orders",
 
   // Dynamic params are supported via square brackets
 } satisfies Pathnames<typeof locales>;

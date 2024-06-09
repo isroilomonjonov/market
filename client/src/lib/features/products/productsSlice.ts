@@ -9,24 +9,19 @@ export interface ProductState {
 }
 
 const initialState: ProductState = {
-  products: getItem("products") || [],
-  totalPrice: (getItem("products") || []).reduce(
-    (total: number, product: any) =>
-      total +
-      product.quantity *
-        (product.discount ? Number(product.discount) : Number(product.price)),
-    0
-  ),
-  totalProducts: (getItem("products") || []).reduce(
-    (total: number, product: any) => total + product.quantity,
-    0
-  ),
+  products:  [],
+  totalPrice:0,
+  totalProducts: 0,
 };
 
 export const productReducer = createSlice({
   name: "product",
   initialState,
   reducers: {
+    setState:( state, action: PayloadAction<any>)=>{
+      state = action.payload
+      return state
+    },
     addProductToState: (state, action: PayloadAction<any>) => {
       if (!action.payload.discount) {
         state.totalPrice = state.totalPrice + Number(action.payload.price);
@@ -84,6 +79,6 @@ export const productReducer = createSlice({
   },
 });
 
-export const { addProductToState, deleteProductFromState, clearProducts } =
+export const { addProductToState, deleteProductFromState, clearProducts,setState } =
   productReducer.actions;
 export const authReducer = productReducer.reducer;

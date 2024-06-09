@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link, useRouter } from "@/navigation";
 
-export function PaginationDemo({ productText, pagination }: { productText: any, pagination: PaginationType }) {
+export function PaginationDemo({ productText, pagination, pathname }: { productText: any, pagination: PaginationType, pathname: "/products" | "/orders" }) {
     const { allPagesCount, isFirstPage, isLastPage, page } = pagination;
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -28,10 +28,10 @@ export function PaginationDemo({ productText, pagination }: { productText: any, 
     const sixPageChange = (num: number) => {
         if (num === 1) {
             setPagesCount(pagesCount + 6);
-            router.push({ pathname: `/products`, query: { page: +offset + 7, size: sizeFront } });
+            router.push({ pathname: pathname, query: { page: +offset + 7, size: sizeFront } });
         } else {
             setPagesCount(pagesCount - 6);
-            router.push({ pathname: `/products`, query: { page: +offset, size: sizeFront } });
+            router.push({ pathname: pathname, query: { page: +offset, size: sizeFront } });
         }
     };
 
@@ -39,9 +39,9 @@ export function PaginationDemo({ productText, pagination }: { productText: any, 
         if (!isFirstPage) {
             if ((pageFront - 1) === offset) {
                 setPagesCount(pagesCount - 6);
-                router.push({ pathname: `/products`, query: { page: pageFront - 1, size: sizeFront } });
+                router.push({ pathname: pathname, query: { page: pageFront - 1, size: sizeFront } });
             } else {
-                router.push({ pathname: `/products`, query: { page: pageFront - 1, size: sizeFront } });
+                router.push({ pathname: pathname, query: { page: pageFront - 1, size: sizeFront } });
             }
         }
     };
@@ -50,9 +50,9 @@ export function PaginationDemo({ productText, pagination }: { productText: any, 
         if (!isLastPage) {
             if (+page === pagesCount) {
                 setPagesCount(pagesCount + 6);
-                router.push({ pathname: `/products`, query: { page: pageFront + 1, size: sizeFront } });
+                router.push({ pathname: pathname, query: { page: pageFront + 1, size: sizeFront } });
             } else {
-                router.push({ pathname: `/products`, query: { page: pageFront + 1, size: sizeFront } });
+                router.push({ pathname: pathname, query: { page: pageFront + 1, size: sizeFront } });
             }
         }
     };
@@ -73,7 +73,7 @@ export function PaginationDemo({ productText, pagination }: { productText: any, 
                     if (pageIndex > offset && pageIndex <= pagesCount) {
                         return (
                             <PaginationItem key={i}>
-                                <Link href={{ pathname: `/products`, query: { page: pageIndex, size: sizeFront } }}>
+                                <Link href={{ pathname: pathname, query: { page: pageIndex, size: sizeFront } }}>
                                     <PaginationLink href="#" isActive={page === pageIndex}>{pageIndex}</PaginationLink>
                                 </Link>
                             </PaginationItem>

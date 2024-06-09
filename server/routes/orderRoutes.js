@@ -8,7 +8,7 @@ router
   .post("/", orderController.createOrder)
   .get("/:id", orderController.getById)
   .get("/", orderController.getAllOrder)
-  .patch("/:id", orderController.updateOrder)
+  .patch("/:id", orderController.updateOrderStatus)
   .delete("/:id", orderController.deleteOrder);
 
 module.exports = router;

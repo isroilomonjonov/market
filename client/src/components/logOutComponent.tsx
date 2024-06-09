@@ -9,12 +9,37 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Link } from '@/navigation';
 import { getItem } from '@/helpers/persistance-storage';
 import axiosInstance from '@/utils/axiosInstance';
+import { setState } from '@/lib/features/products/productsSlice';
 
 const LogOutComponent = () => {
     const isLoggedIn = useAppSelector((state) => state.auth.loggedIn);
     const store = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
+
     useEffect(() => {
+        const productsStr = getItem("products");
+        let products = [];
+        if (productsStr) {
+            try {
+                products = JSON.parse(productsStr);
+            } catch (e) {
+                console.error("Failed to parse products:", e);
+            }
+        }
+        dispatch(setState({
+            products: products,
+            totalPrice: products.reduce(
+                (total: number, product: any) =>
+                    total +
+                    product.quantity *
+                    (product.discount ? Number(product.discount) : Number(product.price)),
+                0
+            ),
+            totalProducts: products.reduce(
+                (total: number, product: any) => total + product.quantity,
+                0
+            ),
+        }))
         async function fetchData() {
             try {
                 if (getItem("token") && !store.loggedIn) {
@@ -29,6 +54,7 @@ const LogOutComponent = () => {
 
             }
         }
+
         fetchData()
     }, []);
     return (

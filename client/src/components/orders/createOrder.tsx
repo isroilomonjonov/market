@@ -39,7 +39,6 @@ const CreateOrder = ({ closeDialog, text }: { closeDialog: () => void, text: any
             });
             closeDialog();
             dispatch(clearProducts())
-            router.push("/")
             return toast({ title: text.orderCompletedSuccesufly })
         } catch (error: any) {
             toast({

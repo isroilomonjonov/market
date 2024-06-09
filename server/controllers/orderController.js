@@ -8,11 +8,11 @@ const { Op } = require("sequelize");
 exports.getAllOrder = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
 
-  queryBuilder.filter().paginate().limitFields().search().sort();
+  queryBuilder.filter().paginate().sort();
   let allOrders = await Orders.findAndCountAll({
     ...queryBuilder.queryOptions,
   });
-  allOrders = queryBuilder.createPage(allOrders);
+  allOrders = queryBuilder.createPagination(allOrders);
   res.json({
     status: "success",
     message: "",
@@ -69,18 +69,16 @@ exports.createOrder = catchAsyn(async (req, res) => {
     },
   });
 });
-exports.updateOrder = catchAsyn(async (req, res) => {
+exports.updateOrderStatus = catchAsyn(async (req, res) => {
   const { id } = req.params;
-
   const byId = await Orders.findByPk(id);
-
   if (!byId) {
     return next(new AppError("Bunday ID li Order topilmadi"));
   }
-  const updatedOrder = await byId.update(req.body);
+  const updatedOrder = await byId.update({ status: req.body.status });
   res.json({
     status: "success",
-    message: "Order ma'lumotlari tahrirlandi",
+    message: "Buyurtma statusi o'zgartirildi",
     data: {
       updatedOrder,
     },
