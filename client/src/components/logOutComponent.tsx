@@ -69,6 +69,9 @@ const LogOutComponent = () => {
                 <DropdownMenuContent className="bg-white border-2 dark:bg-black p-2 w-56 mt-2 rounded-xl">
                     <DropdownMenuGroup>
                         <DropdownMenuItem className='mb-2 p-1'>
+                            <Link href={'/dashboard'}>Dashboard</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className='mb-2 p-1'>
                             <Link href={'/settings'}>Sozlamalar</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className='mb-2 p-1'>

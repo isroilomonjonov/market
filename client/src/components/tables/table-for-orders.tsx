@@ -56,7 +56,7 @@ export function TableForOrders({ status }: { status: string }) {
             </TableHeader>
             <TableBody>
                 {orders.map((order) => (
-                    <TableRow className={`${order.status === "completed" && "bg-green-800"} ${order.status === "canceled" && "bg-red-800"}`} key={order.id}>
+                    <TableRow className={`${order.status === "completed" && "dark:bg-green-800 bg-green-400"} ${order.status === "canceled" && "dark:bg-red-800 bg-red-400"}`} key={order.id}>
                         <TableCell>{order.status === "pending" && "Yangi"} {order.status === "completed" && "Tugatildi"} {order.status === "canceled" && "Bekor qilindi"}</TableCell>
                         <TableCell className="font-medium">{order.name}</TableCell>
                         <TableCell>{order.phoneNumber}</TableCell>

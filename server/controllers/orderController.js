@@ -4,7 +4,7 @@ const AppError = require("../utils/AppError");
 const QueryBuilder = require("../utils/queryBuilder");
 const OrderItems = require("../models/OrderItems");
 const { Op } = require("sequelize");
-
+const timeObject = require("../utils/timeObject");
 exports.getAllOrder = catchAsyn(async (req, res, next) => {
   const queryBuilder = new QueryBuilder(req.query);
 
@@ -98,5 +98,66 @@ exports.deleteOrder = catchAsyn(async (req, res) => {
     status: "success",
     message: "Order o'chirildi",
     data: null,
+  });
+});
+exports.getStatistics = catchAsyn(async (req, res) => {
+  const queryData = req.query;
+  const query = Object.keys(req.query).find(
+    (e) =>
+      e === "yesterday" ||
+      "today" ||
+      "week" ||
+      "month" ||
+      "year" ||
+      ("start" && "end")
+  );
+  const getTime = new timeObject(query, queryData).getTimes();
+
+  const allOrders = await Orders.findAndCountAll({
+    where: {
+      createdAt: {
+        [Op.gt]: getTime.start,
+        [Op.lt]: getTime.end,
+      },
+    },
+  });
+  const allOrdersStatusCompleted = await Orders.findAndCountAll({
+    where: {
+      status: "completed",
+      createdAt: {
+        [Op.gt]: getTime.start,
+        [Op.lt]: getTime.end,
+      },
+    },
+  });
+  const totalPrice = await Orders.sum("totalPrice", {
+    where: {
+      status: "completed",
+      createdAt: {
+        [Op.gt]: getTime.start,
+        [Op.lt]: getTime.end,
+      },
+    },
+  });
+  const allOrdersStatusCanceled = await Orders.findAndCountAll({
+    where: {
+      status: "canceled",
+      createdAt: {
+        [Op.gt]: getTime.start,
+        [Op.lt]: getTime.end,
+      },
+    },
+  });
+  const queryBuilder = new QueryBuilder(req.query);
+  res.status(201).json({
+    status: "success",
+    message: "Barcha orderlar",
+    data: {
+      allOrders: allOrders.count,
+      allOrdersStatusCompleted: allOrdersStatusCompleted.count,
+      allOrdersStatusCanceled: allOrdersStatusCanceled.count,
+      totalPrice,
+      getTime,
+    },
   });
 });

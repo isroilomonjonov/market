@@ -32,8 +32,8 @@ const ChangeOrderStatus = ({ order, getAll }: { order: OrderType, getAll?: () =>
                 <DialogContent>
                     <h1 className='text-3xl font-medium mb-4'>{`Buyurtmani "${dialogOpen === "canceled" ? "bekor qilindi" : "yakunlandi"}" statusiga o'zgartirmoqchimisiz!`}</h1>
                     <div className='flex justify-between items-center'>
-                        <Button onClick={() => setDialogOpen(false)}>{"Orqaga"}</Button>
-                        <Button variant={'default'} onClick={() => changeOrderStatus(dialogOpen as string)}>{"O'zgartirish"}</Button>
+                        <Button variant="destructive" onClick={() => setDialogOpen(false)}>{"Orqaga"}</Button>
+                        <Button variant={'green'} onClick={() => changeOrderStatus(dialogOpen as string)}>{"O'zgartirish"}</Button>
                     </div>
                 </DialogContent>
             </Dialog>

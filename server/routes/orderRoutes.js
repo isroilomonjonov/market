@@ -6,6 +6,7 @@ const router = express.Router();
 
 router
   .post("/", orderController.createOrder)
+  .get("/statistics", orderController.getStatistics)
   .get("/:id", orderController.getById)
   .get("/", orderController.getAllOrder)
   .patch("/:id", orderController.updateOrderStatus)
