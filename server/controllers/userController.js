@@ -1,7 +1,7 @@
 const Users = require("../models/Users");
 const catchAsyn = require("../utils/catchAsync");
 const { validationResult } = require("express-validator");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 const { Op } = require("sequelize");
 const QueryBuilder = require("../utils/queryBuilder");
 const { compare, hash } = require("bcrypt");

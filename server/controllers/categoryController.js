@@ -1,5 +1,5 @@
 const catchAsyn = require("../utils/catchAsync");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 const Categories = require("../models/Categories");
 
 exports.getAllCategory = catchAsyn(async (req, res, next) => {

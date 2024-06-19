@@ -1,6 +1,6 @@
 const Products = require("../models/Products");
 const catchAsyn = require("../utils/catchAsync");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 const QueryBuilder = require("../utils/queryBuilder");
 const Categories = require("../models/Categories");
 const Attachments = require("../models/Attachments");

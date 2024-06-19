@@ -1,6 +1,6 @@
 const Orders = require("../models/Orders");
 const catchAsyn = require("../utils/catchAsync");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 const QueryBuilder = require("../utils/queryBuilder");
 const OrderItems = require("../models/OrderItems");
 const { Op } = require("sequelize");
