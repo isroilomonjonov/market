@@ -25,7 +25,7 @@ const CartProductContainer = ({ text }: { text: any }) => {
                 <CartProduct key={product.id} el={product} />
             ))}
             {products.length > 0 && <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogTrigger onClick={() => setDialogOpen(true)} className='p-2 px-4 rounded-sm text-white'><button className='flex gap-2 p-4 px-8 border items-center'>{text.order} <CircleArrowRight className='w-6 h-6' /><span className='text-2xl'>{formatter.format(Number(totalPrice))}</span></button></DialogTrigger>
+                <DialogTrigger onClick={() => setDialogOpen(true)} className='p-2 px-4 rounded-sm'><button className='flex gap-2 p-4 px-8 border items-center'>{text.order} <CircleArrowRight className='w-6 h-6' /><span className='text-2xl'>{formatter.format(Number(totalPrice))}</span></button></DialogTrigger>
                 <DialogContent>
                     <CreateOrder closeDialog={() => setDialogOpen(false)} text={text} />
                 </DialogContent>
