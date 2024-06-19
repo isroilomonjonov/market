@@ -1,4 +1,4 @@
-import axiosInstance from '@/utils/axiosInstance';
+import axiosInstance, { imageURL } from '@/utils/axiosInstance';
 import { useState } from 'react';
 import { toast } from './ui/use-toast';
 import { X } from 'lucide-react';
@@ -42,7 +42,7 @@ const ImageUploader = ({ selectedImage, setSelectedImage }: { selectedImage: Ima
                 <div className="relative max-w-64 max-h-64">
                     {selectedImage?.name && <button className="absolute top-0 left-[90%] lg:left-[100%] z-10" onClick={() => setSelectedImage(null)}>
                         <X className='w-10 h-10' /></button>}
-                    {selectedImage ? <img src={`${selectedImage?.name ? `http://localhost:9090/img/${selectedImage?.name}` : "/user.png"}`} /> :
+                    {selectedImage ? <img src={`${selectedImage?.name ? `${imageURL}${selectedImage?.name}` : "/user.png"}`} /> :
                         <p>Rasm tanlash</p>}
                 </div>
             </label >
