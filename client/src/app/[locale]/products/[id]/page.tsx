@@ -1,6 +1,5 @@
 'use client'
 import InnerCardMainInfo from '@/components/inner-card-main-info'
-import { ProductsData } from '@/data/products'
 import React, { useEffect, useState } from 'react'
 import ReduxProvider from '../../storeProvider'
 import axiosInstance from '@/utils/axiosInstance'
