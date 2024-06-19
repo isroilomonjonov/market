@@ -29,8 +29,9 @@ export function ToggleLanguage({ locale, navAllText }: { locale: string, navAllT
         <Select defaultValue={locale} onValueChange={(value) => {
             if (pathname === "/products/[id]") {
                 return router.replace('/', { locale: value });;
+            } if (pathname === "/cart" || pathname === "/categories" || pathname === "/" || pathname === "/contacts" || pathname === "/dashboard" || pathname === "/orders" || pathname === "/products" || pathname === "/products-for-admin" || pathname === "/products-for-admin/new" || pathname === "/settings") {
+                router.replace(pathname, { locale: value });
             }
-            router.replace(pathname, { locale: value });
         }}>
             <SelectTrigger className="w-[80px]">
                 <SelectValue placeholder="" />
