@@ -43,7 +43,7 @@ exports.getById = catchAsyn(async (req, res, next) => {
   });
 });
 exports.createProduct = catchAsyn(async (req, res) => {
-  if (!req.body.discount.length > 0) {
+  if (!req.body?.discount?.length > 0) {
     delete req.body.discount;
   }
   const Product = await Products.create(req.body);
