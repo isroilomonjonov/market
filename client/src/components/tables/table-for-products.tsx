@@ -9,8 +9,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { ProductsData } from "@/data/products"
-import { Button } from "../ui/button"
 import { useEffect, useState } from "react"
 import { ProductType } from "../../../interfaces/product-interface"
 import axiosInstance from "@/utils/axiosInstance"
