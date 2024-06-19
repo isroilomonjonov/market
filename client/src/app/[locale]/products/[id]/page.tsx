@@ -3,7 +3,6 @@ import InnerCardMainInfo from '@/components/inner-card-main-info'
 import { ProductsData } from '@/data/products'
 import React, { useEffect, useState } from 'react'
 import ReduxProvider from '../../storeProvider'
-import AuthUpdater from '@/components/redux-component-test'
 import axiosInstance from '@/utils/axiosInstance'
 import { ProductType } from '../../../../../interfaces/product-interface'
 
